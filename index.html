@@ -9,11 +9,11 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: radial-gradient(circle at top, #ff9a9e, #fad0c4);
+    background: #e99b9b;
     overflow: hidden;
 }
 
-/* ---------- INTRO SCREEN ---------- */
+/* ---------- INTRO ---------- */
 
 .intro-screen {
     height: 100vh;
@@ -59,7 +59,7 @@ body {
     transform: scale(1.1);
 }
 
-/* ---------- SURPRISE SECTION ---------- */
+/* ---------- SURPRISE ---------- */
 
 .surprise {
     display: none;
@@ -69,29 +69,53 @@ body {
     flex-direction: column;
 }
 
-/* Watch Container */
 .watch-container {
     position: relative;
     animation: pop 1s ease forwards;
 }
 
 .watch-container img {
-    width: 260px;
+    width: 320px;
 }
 
-/* Digital display overlay */
+/* Strap Text (Top Strap) */
+.strap-text-top {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: #b35454;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.4);
+}
+
+/* Strap Text (Bottom Strap) */
+.strap-text-bottom {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: #b35454;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.4);
+}
+
+/* Digital Time Only */
 .watch-text {
     position: absolute;
-    top: 46%;
+    top: 47%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #ff2f68;
+    color: black;
     font-family: 'Courier New', monospace;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 18px;
     text-align: center;
-    width: 120px;
-    line-height: 1.2;
+    width: 130px;
 }
 
 @keyframes pop {
@@ -114,6 +138,17 @@ body {
 <div class="surprise" id="surprise">
     <div class="watch-container">
         <img src="watch.png" alt="Casio Watch">
+
+        <!-- Engraved Strap Text -->
+        <div class="strap-text-top">
+            I LOVE YOU
+        </div>
+
+        <div class="strap-text-bottom">
+            NANDY ❤️
+        </div>
+
+        <!-- Digital Time -->
         <div class="watch-text" id="watchDisplay"></div>
     </div>
 </div>
@@ -134,19 +169,13 @@ function startWatch() {
         let hours = now.getHours();
         let minutes = now.getMinutes();
         let seconds = now.getSeconds();
-        let day = now.toLocaleDateString('en-US', { weekday: 'short' });
 
         hours = hours % 12 || 12;
         minutes = minutes < 10 ? "0" + minutes : minutes;
 
-        // Blinking colon
         const colon = seconds % 2 === 0 ? ":" : " ";
 
-        display.innerHTML = `
-            ${day}<br>
-            ${hours}${colon}${minutes}<br>
-            I Love You<br>Nandy ❤️
-        `;
+        display.innerHTML = `${hours}${colon}${minutes}`;
     }, 1000);
 }
 </script>
